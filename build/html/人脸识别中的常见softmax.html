@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to 昭君姐的笔记’s documentation! &mdash; 昭君姐的笔记 昭君姐的笔记 documentation</title>
+  <title>人脸识别中的常见softmax函数 &mdash; 昭君姐的笔记 昭君姐的笔记 documentation</title>
   
 
   
@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="人脸识别中的常见softmax函数" href="人脸识别中的常见softmax.html" /> 
+    <link rel="prev" title="Welcome to 昭君姐的笔记’s documentation!" href="index.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -47,7 +47,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> 昭君姐的笔记
+            <a href="index.html" class="icon icon-home"> 昭君姐的笔记
           
 
           
@@ -78,8 +78,8 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="人脸识别中的常见softmax.html">人脸识别中的常见softmax函数</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">人脸识别中的常见softmax函数</a></li>
 </ul>
 
             
@@ -94,7 +94,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">昭君姐的笔记</a>
+          <a href="index.html">昭君姐的笔记</a>
         
       </nav>
 
@@ -123,15 +123,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Welcome to 昭君姐的笔记’s documentation!</li>
+      <li>人脸识别中的常见softmax函数</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/人脸识别中的常见softmax.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -144,22 +144,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-s-documentation">
-<h1>Welcome to 昭君姐的笔记’s documentation!<a class="headerlink" href="#welcome-to-s-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="人脸识别中的常见softmax.html">人脸识别中的常见softmax函数</a></li>
-</ul>
-</div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
-</ul>
+  <div class="section" id="softmax">
+<h1>人脸识别中的常见softmax函数<a class="headerlink" href="#softmax" title="Permalink to this headline">¶</a></h1>
+<p>一表流</p>
+<p>|Name|Loss公式($g_i$)|权重/特征归一|论文|
+|–|–|–|–|
+|softmax|$$\frac{1}{N}\sum_i-log\frac{e^{w_{y_i}·x_i}}{\sum_ke^{w_k·x_i}}$$|N/N||
+|NormFace|同softmax|Y/Y|<a class="reference external" href="https://arxiv.org/abs/1704.06369">arxiv</a> ACMMM 2017|
+|L softmax|$$\frac{1}{N}\sum_i-log\frac{e^{||w_{y_i}||·||x_i||·cos(m·\theta_{y_i, i})}}{e^{||w_{y_i}||·||x_i||·cos(m·\theta_{y_i, i})} + \sum_{k \neq y_i}e^{||w_k||·||x_i||·cos\theta_{k, i}}}$$ 首次提出angular margin|N/N|<a class="reference external" href="https://arxiv.org/abs/1612.02295">arxiv</a> ICML 2016|
+|A softmax|$$\frac{1}{N}\sum_i-log\frac{e^{||x_i||·cos(m·\theta_{y_i, i})}}{e^{||x_i||·cos(m·\theta_{y_i, i})} + \sum_{k \neq y_i}e^{||x_i||·cos\theta_{k, i}}}$$ 增加weight norm|Y/N|<a class="reference external" href="https://arxiv.org/abs/1704.08063">arxiv</a> CVPR 2017|
+|AM softmax|$$\frac{1}{N}\sum_i-log\frac{e^{s·(cos(\theta_{y_i, i})-m)}}{e^{s·(cos(\theta_{y_i, i})-m)} + \sum_{k \neq y_i}e^{cos\theta_{k, i}}}$$ 增加feat norm和scale，margin由乘法变为加法|Y/Y|<a class="reference external" href="https://arxiv.org/abs/1801.05599">arxiv</a> ICLRw 2018|
+|CosFace|同AM-Softmax，和AM-Softmax接近同时发布|Y/Y|<a class="reference external" href="https://arxiv.org/abs/1801.09414">arxiv</a> CVPR 2018|
+|ArcFace|$$\frac{1}{N}\sum_i-log\frac{e^{s·cos(\theta_{y_i, i}+m)}}{e^{s·cos(\theta_{y_i, i}+m)} + \sum_{k \neq y_i}e^{cos\theta_{k, i}}}$$ 类似AM softmax，将margin由cos外移到内|Y/Y|<a class="reference external" href="https://arxiv.org/abs/1801.07698">arxiv</a> CVPR 2019|
+|Adaptive Face|$$\frac{1}{N}\sum_i-log\frac{e^{s·(cos(\theta_{y_i, i})-m_{y_i})}}{e^{s·(cos(\theta_{y_i, i})-m_{y_i})} + \sum_{k \neq y_i}e^{cos\theta_{k, i}}} - \lambda\frac{1}{K}\sum_km_k$$ 将margin参数化，与类别相关|Y/Y|<a class="reference external" href="http://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_AdaptiveFace_Adaptive_Margin_and_Sampling_for_Face_Recognition_CVPR_2019_paper.pdf">pdf</a> CVPR 2019|</p>
+<p>todo Decision Boundary</p>
 </div>
 
 
@@ -170,8 +168,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="人脸识别中的常见softmax.html" class="btn btn-neutral float-right" title="人脸识别中的常见softmax函数" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
+        <a href="index.html" class="btn btn-neutral" title="Welcome to 昭君姐的笔记’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

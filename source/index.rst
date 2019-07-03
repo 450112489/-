@@ -9,7 +9,8 @@ Welcome to 昭君姐的笔记's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   
+   人脸识别中的常见softmax
 
 
 Indices and tables
